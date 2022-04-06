@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module macorp.forecast.cli</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="macorp.html"><font color="#ffffff">macorp</font></a>.<a href="macorp.forecast.html"><font color="#ffffff">forecast</font></a>.cli</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="..">index</a><br><a href="file:../macorp/forecast/cli.py">../macorp/forecast/cli.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;files&nbsp;defines&nbsp;the&nbsp;commands&nbsp;of&nbsp;MaCorp's&nbsp;forecast&nbsp;module.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="click.html">click</a><br>
+<a href="datetime.html">datetime</a><br>
+<a href="sklearn.linear_model.html">sklearn.linear_model</a><br>
+</td><td width="25%" valign=top><a href="matplotlib.dates.html">matplotlib.dates</a><br>
+<a href="os.html">os</a><br>
+<a href="pathlib.html">pathlib</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+<a href="pickle.html">pickle</a><br>
+<a href="matplotlib.pyplot.html">matplotlib.pyplot</a><br>
+</td><td width="25%" valign=top><a href="sklearn.svm.html">sklearn.svm</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-chat_forecast"><strong>chat_forecast</strong></a>(deployment_path: Union[str, pathlib.Path], date: ~AnyStr, eligible_users: int, verbosity: int) -&gt; None</dt><dd><tt>predicts&nbsp;number&nbsp;of&nbsp;chats&nbsp;for&nbsp;a&nbsp;specific&nbsp;date.<br>
+Example:<br>
+#&nbsp;macorp.forecast&nbsp;chat_forecast&nbsp;-d&nbsp;deployed_models/LinearRegression___2022-03-31.pkl&nbsp;-t&nbsp;2017-07-01&nbsp;-e&nbsp;45000<br>
+<br>
+&nbsp;<br>
+:param&nbsp;deployment_path:&nbsp;path&nbsp;to&nbsp;a&nbsp;deployment&nbsp;model&nbsp;to&nbsp;load.<br>
+:param&nbsp;date:&nbsp;date&nbsp;string&nbsp;('example&nbsp;2017-07-01')<br>
+:param&nbsp;eligible_users:&nbsp;number&nbsp;of&nbsp;users&nbsp;connected&nbsp;to&nbsp;the&nbsp;platform<br>
+:param&nbsp;verbosity:&nbsp;level&nbsp;of&nbsp;verbosity<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-chat_forecast_batch"><strong>chat_forecast_batch</strong></a>(deployment_path: Union[str, pathlib.Path], demand_path: Union[str, pathlib.Path], visualization_path: ~AnyStr, verbosity: int)</dt><dd><tt>predicts&nbsp;number&nbsp;of&nbsp;chats&nbsp;for&nbsp;a&nbsp;batch&nbsp;of&nbsp;dates&nbsp;stored&nbsp;in&nbsp;a&nbsp;csv&nbsp;file.<br>
+Example:<br>
+macorp.forecast&nbsp;chat-forecast-batch&nbsp;-p&nbsp;.\deployed_models\LinearRegression___2022-03-31.pkl&nbsp;-d&nbsp;.\data\chat_demand.csv&nbsp;-i&nbsp;chat_forecast_visual.png<br>
+<br>
+&nbsp;<br>
+:param&nbsp;deployment_path:&nbsp;path&nbsp;to&nbsp;a&nbsp;deployment&nbsp;model&nbsp;to&nbsp;load.<br>
+:param&nbsp;demand_path:&nbsp;path&nbsp;to&nbsp;demand&nbsp;csv&nbsp;file&nbsp;with&nbsp;the&nbsp;following&nbsp;columns:&nbsp;(date,&nbsp;eligible_users)&nbsp;or&nbsp;(date,&nbsp;eligible_users,&nbsp;chats)<br>
+:param&nbsp;visualization_path:&nbsp;if&nbsp;provided&nbsp;the&nbsp;result&nbsp;visualized&nbsp;is&nbsp;stored&nbsp;in&nbsp;the&nbsp;given&nbsp;path<br>
+:param&nbsp;verbosity:&nbsp;level&nbsp;of&nbsp;verbosity<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-main"><strong>main</strong></a>() -&gt; None</dt><dd><tt>main&nbsp;method&nbsp;of&nbsp;forecast&nbsp;cli.<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-staff_recom"><strong>staff_recom</strong></a>(chats: int, avg_handling_time: float, wait_time: float, agent_refresh_fraction: float, satisfaction: float)</dt><dd><tt>Recommends&nbsp;number&nbsp;of&nbsp;nurses&nbsp;based&nbsp;on&nbsp;a&nbsp;single&nbsp;demand&nbsp;entry&nbsp;(number&nbsp;of&nbsp;chats)&nbsp;and&nbsp;given&nbsp;corporate&nbsp;standards<br>
+Example:<br>
+#<br>
+<br>
+:param&nbsp;chats:&nbsp;number&nbsp;of&nbsp;chats<br>
+:param&nbsp;avg_handling_time:&nbsp;average&nbsp;time&nbsp;spent&nbsp;with&nbsp;a&nbsp;customer&nbsp;from&nbsp;when&nbsp;they&nbsp;are&nbsp;connected&nbsp;to&nbsp;a&nbsp;nurse<br>
+:param&nbsp;wait_time:&nbsp;targeted&nbsp;wait&nbsp;time;&nbsp;increasing&nbsp;this&nbsp;number&nbsp;reduces&nbsp;operation&nbsp;costs&nbsp;of&nbsp;the&nbsp;company&nbsp;through&nbsp;recommending&nbsp;less&nbsp;number&nbsp;of&nbsp;nurses&nbsp;but&nbsp;a&nbsp;long&nbsp;time&nbsp;makes&nbsp;patients&nbsp;impatient!<br>
+:param&nbsp;agent_refresh_fraction:&nbsp;fraction&nbsp;of&nbsp;time&nbsp;each&nbsp;nurse&nbsp;is&nbsp;expected&nbsp;to&nbsp;spend&nbsp;on&nbsp;refreshment.<br>
+:param&nbsp;satisfaction:&nbsp;level&nbsp;of&nbsp;satisfaction&nbsp;of&nbsp;given&nbsp;criteria&nbsp;(0.&nbsp;to&nbsp;1.)<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-staff_recom_batch"><strong>staff_recom_batch</strong></a>(deployment_path: Union[str, pathlib.Path, NoneType], demand_path: Union[str, pathlib.Path], visualization_path: ~AnyStr, avg_handling_time: float, wait_time: float, agent_refresh_fraction: float, satisfaction: float, verbosity: int)</dt><dd><tt>Recommends&nbsp;number&nbsp;of&nbsp;nurses&nbsp;based&nbsp;on&nbsp;a&nbsp;batch&nbsp;0f&nbsp;demand&nbsp;entry&nbsp;(number&nbsp;of&nbsp;chats)&nbsp;and&nbsp;given&nbsp;corporate&nbsp;standards<br>
+Example:<br>
+#&nbsp;macorp.forecast&nbsp;chat-forecast-batch&nbsp;-p&nbsp;deployed_models\LinearRegression___2022-03-31.pkl&nbsp;-d&nbsp;data\chat_demand.csv&nbsp;-i&nbsp;nurse_recom.png<br>
+<br>
+:param&nbsp;deployment_path:&nbsp;path&nbsp;to&nbsp;a&nbsp;deployment&nbsp;model&nbsp;to&nbsp;load.<br>
+:param&nbsp;demand_path:&nbsp;path&nbsp;to&nbsp;demand&nbsp;csv&nbsp;file&nbsp;with&nbsp;the&nbsp;following&nbsp;columns:&nbsp;(date,&nbsp;eligible_users)&nbsp;or&nbsp;(date,&nbsp;eligible_users,&nbsp;chats)<br>
+:param&nbsp;visualization_path:&nbsp;if&nbsp;provided&nbsp;the&nbsp;result&nbsp;visualized&nbsp;is&nbsp;stored&nbsp;in&nbsp;the&nbsp;given&nbsp;path<br>
+:param&nbsp;avg_handling_time:&nbsp;average&nbsp;time&nbsp;spent&nbsp;with&nbsp;a&nbsp;customer&nbsp;from&nbsp;when&nbsp;they&nbsp;are&nbsp;connected&nbsp;to&nbsp;a&nbsp;nurse<br>
+:param&nbsp;wait_time:&nbsp;targeted&nbsp;wait&nbsp;time.&nbsp;In&nbsp;creasing&nbsp;this&nbsp;number&nbsp;reduces&nbsp;operation&nbsp;costs&nbsp;of&nbsp;the&nbsp;company&nbsp;through&nbsp;recommending&nbsp;less&nbsp;number&nbsp;of&nbsp;nurses&nbsp;but&nbsp;a&nbsp;long&nbsp;time&nbsp;makes&nbsp;patients&nbsp;impatient!<br>
+:param&nbsp;agent_refresh_fraction:&nbsp;fraction&nbsp;of&nbsp;time&nbsp;each&nbsp;nurse&nbsp;is&nbsp;expected&nbsp;to&nbsp;spend&nbsp;on&nbsp;refreshment.<br>
+:param&nbsp;satisfaction:&nbsp;level&nbsp;of&nbsp;satisfaction&nbsp;of&nbsp;given&nbsp;criteria&nbsp;(0.&nbsp;to&nbsp;1.)<br>
+:param&nbsp;verbosity:<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-train_chat_forecast"><strong>train_chat_forecast</strong></a>(path_to_chat_history: Union[str, pathlib.Path], deployment_dir: ~AnyStr, scoring: ~AnyStr, visualize: bool, verbosity: int) -&gt; None</dt><dd><tt>Trains&nbsp;a&nbsp;regressor&nbsp;for&nbsp;predicting&nbsp;number&nbsp;of&nbsp;chats&nbsp;in&nbsp;a&nbsp;day.<br>
+Example:<br>
+#&nbsp;macorp.forecast&nbsp;train_chat_forecast&nbsp;-p&nbsp;data/chat_demand.csv&nbsp;-i<br>
+&nbsp;<br>
+&nbsp;<br>
+:param&nbsp;path_to_chat_history:&nbsp;path&nbsp;to&nbsp;chat&nbsp;data&nbsp;in&nbsp;csv&nbsp;format.&nbsp;The&nbsp;file&nbsp;must&nbsp;have&nbsp;the&nbsp;following&nbsp;columns:&nbsp;(date,&nbsp;eligible_users,&nbsp;chats)<br>
+:param&nbsp;deployment_dir:&nbsp;the&nbsp;directory&nbsp;in&nbsp;which&nbsp;the&nbsp;deployment&nbsp;model&nbsp;should&nbsp;be&nbsp;store.<br>
+:param&nbsp;scoring:&nbsp;loss&nbsp;functions&nbsp;for&nbsp;training,&nbsp;default&nbsp;is&nbsp;'neg_mean_absolute_error'.&nbsp;Other&nbsp;options&nbsp;are&nbsp;listed&nbsp;at&nbsp;<a href="https://scikit-learn.org/stable/modules/model_evaluation.html">https://scikit-learn.org/stable/modules/model_evaluation.html</a><br>
+:param&nbsp;visualize:&nbsp;boolean&nbsp;flag&nbsp;for&nbsp;visualizing&nbsp;the&nbsp;validation&nbsp;results.<br>
+:param&nbsp;verbosity:&nbsp;level&nbsp;of&nbsp;verbosity.<br>
+:return:&nbsp;None</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>AnyStr</strong> = ~AnyStr<br>
+<strong>Optional</strong> = typing.Optional<br>
+<strong>Union</strong> = typing.Union<br>
+<strong>run</strong> = &lt;Group run&gt;</td></tr></table>
+</body></html>

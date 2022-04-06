@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module macorp.forecast.utils</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="macorp.html"><font color="#ffffff">macorp</font></a>.<a href="macorp.forecast.html"><font color="#ffffff">forecast</font></a>.utils</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="..">index</a><br><a href="file:../macorp/forecast/utils.py">macorp/forecast/utils.py</a></font></td></tr></table>
+    <p><tt>Utils&nbsp;used&nbsp;by&nbsp;other&nbsp;functions&nbsp;and&nbsp;classes.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="datetime.html">datetime</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="macorp.forecast.utils.html#ErlangC">ErlangC</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ErlangC">class <strong>ErlangC</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ErlangC">ErlangC</a>(transactions:&nbsp;float,&nbsp;aht:&nbsp;float,&nbsp;asa:&nbsp;float,&nbsp;interval:&nbsp;int&nbsp;=&nbsp;None,&nbsp;shrinkage=0.0,&nbsp;**kwargs)<br>
+&nbsp;<br>
+#&nbsp;from&nbsp;&nbsp;<a href="https://github.com/rodrigo-arenas/pyworkforce/blob/main/pyworkforce/queuing/erlang.py">https://github.com/rodrigo-arenas/pyworkforce/blob/main/pyworkforce/queuing/erlang.py</a><br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ErlangC-__init__"><strong>__init__</strong></a>(self, transactions: float, aht: float, asa: float, interval: int = None, shrinkage=0.0, **kwargs)</dt><dd><tt>Computes&nbsp;the&nbsp;number&nbsp;of&nbsp;positions&nbsp;required&nbsp;fo&nbsp;attend&nbsp;a&nbsp;number&nbsp;of&nbsp;transactions&nbsp;in&nbsp;a&nbsp;queue&nbsp;system&nbsp;based&nbsp;on&nbsp;<a href="#ErlangC">ErlangC</a><br>
+Implementation&nbsp;based&nbsp;on:&nbsp;<a href="https://lucidmanager.org/data-science/call-centre-workforce-planning-erlang-c-in-r/">https://lucidmanager.org/data-science/call-centre-workforce-planning-erlang-c-in-r/</a><br>
+:param&nbsp;transactions:&nbsp;number&nbsp;of&nbsp;total&nbsp;transactions&nbsp;that&nbsp;comes&nbsp;in&nbsp;an&nbsp;interval<br>
+:param&nbsp;aht:&nbsp;average&nbsp;handling&nbsp;time&nbsp;of&nbsp;a&nbsp;transaction&nbsp;(minutes)<br>
+:param&nbsp;asa:&nbsp;Required&nbsp;average&nbsp;speed&nbsp;of&nbsp;answer&nbsp;in&nbsp;minutes<br>
+:param&nbsp;interval:&nbsp;Interval&nbsp;length&nbsp;(minutes)<br>
+:param&nbsp;shrinkage:&nbsp;Percentage&nbsp;of&nbsp;time&nbsp;that&nbsp;an&nbsp;operator&nbsp;unit&nbsp;is&nbsp;not&nbsp;available</tt></dd></dl>
+
+<dl><dt><a name="ErlangC-achieved_occupancy"><strong>achieved_occupancy</strong></a>(self, positions, scale_positions=False)</dt><dd><tt>:param&nbsp;positions:&nbsp;Number&nbsp;of&nbsp;raw&nbsp;positions<br>
+:param&nbsp;scale_positions:&nbsp;True&nbsp;if&nbsp;the&nbsp;positions&nbsp;where&nbsp;calculated&nbsp;using&nbsp;shrinkage<br>
+:return:&nbsp;Expected&nbsp;occupancy&nbsp;of&nbsp;positions</tt></dd></dl>
+
+<dl><dt><a name="ErlangC-required_positions"><strong>required_positions</strong></a>(self, service_level: float, max_occupancy: float = 1.0)</dt><dd><tt>:param&nbsp;service_level:&nbsp;Target&nbsp;service&nbsp;level<br>
+:param&nbsp;max_occupancy:&nbsp;Maximum&nbsp;fraction&nbsp;of&nbsp;time&nbsp;that&nbsp;an&nbsp;attending&nbsp;position&nbsp;can&nbsp;be&nbsp;occupied<br>
+:return:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;raw_positions:&nbsp;Required&nbsp;positions&nbsp;assuming&nbsp;shrinkage&nbsp;=&nbsp;0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;positions:&nbsp;Number&nbsp;of&nbsp;positions&nbsp;needed&nbsp;to&nbsp;ensure&nbsp;the&nbsp;required&nbsp;service&nbsp;level<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;service_level:&nbsp;Fraction&nbsp;of&nbsp;transactions&nbsp;that&nbsp;are&nbsp;expect&nbsp;to&nbsp;be&nbsp;assigned&nbsp;to&nbsp;a&nbsp;position,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;before&nbsp;the&nbsp;asa&nbsp;time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;occupancy:&nbsp;Expected&nbsp;occupancy&nbsp;of&nbsp;positions<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;waiting_probability:&nbsp;The&nbsp;probability&nbsp;of&nbsp;a&nbsp;transaction&nbsp;waits&nbsp;in&nbsp;queue</tt></dd></dl>
+
+<dl><dt><a name="ErlangC-service_level"><strong>service_level</strong></a>(self, positions, scale_positions=False)</dt><dd><tt>:param&nbsp;positions:&nbsp;Number&nbsp;of&nbsp;positions&nbsp;attending<br>
+:param&nbsp;scale_positions:&nbsp;True&nbsp;if&nbsp;the&nbsp;positions&nbsp;where&nbsp;calculated&nbsp;using&nbsp;shrinkage<br>
+:return:&nbsp;achieved&nbsp;service&nbsp;level</tt></dd></dl>
+
+<dl><dt><a name="ErlangC-waiting_probability"><strong>waiting_probability</strong></a>(self, positions, scale_positions=False)</dt><dd><tt>:param&nbsp;positions:&nbsp;Number&nbsp;of&nbsp;positions&nbsp;to&nbsp;attend&nbsp;the&nbsp;transactions<br>
+:param&nbsp;scale_positions:&nbsp;True&nbsp;if&nbsp;the&nbsp;positions&nbsp;where&nbsp;calculated&nbsp;using&nbsp;shrinkage<br>
+:return:&nbsp;the&nbsp;probability&nbsp;of&nbsp;a&nbsp;transaction&nbsp;waits&nbsp;in&nbsp;queue</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-ceil"><strong>ceil</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;smallest&nbsp;integer&nbsp;&gt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-exp"><strong>exp</strong></a>(x, /)</dt><dd><tt>Return&nbsp;e&nbsp;raised&nbsp;to&nbsp;the&nbsp;power&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-extract_features"><strong>extract_features</strong></a>(date: datetime.date) -&gt; Dict</dt></dl>
+ <dl><dt><a name="-extract_features_from_series"><strong>extract_features_from_series</strong></a>(date_series: Type[pandas.core.series.Series]) -&gt; Dict[str, List]</dt></dl>
+ <dl><dt><a name="-floor"><strong>floor</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integer&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Dict</strong> = typing.Dict<br>
+<strong>List</strong> = typing.List<br>
+<strong>Type</strong> = typing.Type</td></tr></table>
+</body></html>

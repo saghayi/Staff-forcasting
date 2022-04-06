@@ -1,0 +1,3 @@
+r"""
+The macorp module
+"""

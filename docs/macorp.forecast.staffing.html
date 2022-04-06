@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module macorp.forecast.staffing</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="macorp.html"><font color="#ffffff">macorp</font></a>.<a href="macorp.forecast.html"><font color="#ffffff">forecast</font></a>.staffing</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href="..">index</a><br><a href="file:../macorp/forecast/staffing.py">../macorp/forecast/staffing.py</a></font></td></tr></table>
+    <p><tt>Since&nbsp;staffing&nbsp;is&nbsp;being&nbsp;determined&nbsp;for&nbsp;providing&nbsp;healthcare,&nbsp;it&nbsp;seems&nbsp;better&nbsp;for&nbsp;staff&nbsp;not&nbsp;to&nbsp;multiplex&nbsp;they&nbsp;task.<br>
+Therefore,&nbsp;we&nbsp;assume&nbsp;the&nbsp;full&nbsp;concentration&nbsp;of&nbsp;the&nbsp;nurse&nbsp;when&nbsp;connected&nbsp;with&nbsp;a&nbsp;patient&nbsp;whether&nbsp;the&nbsp;medium&nbsp;is&nbsp;text-based,<br>
+audio-based&nbsp;or&nbsp;visual.<br>
+Therefore,&nbsp;we&nbsp;use&nbsp;Erlang&nbsp;C&nbsp;formula&nbsp;to&nbsp;determine&nbsp;the&nbsp;number&nbsp;of&nbsp;staff&nbsp;(nurses)&nbsp;needed&nbsp;at&nbsp;each&nbsp;day&nbsp;at&nbsp;MaCorp<br>
+communication&nbsp;centre.<br>
+Erlang&nbsp;C&nbsp;makes&nbsp;a&nbsp;few&nbsp;assumptions&nbsp;in&nbsp;order&nbsp;to&nbsp;come&nbsp;up&nbsp;with&nbsp;an&nbsp;accurate&nbsp;recommendation<br>
+(based&nbsp;on&nbsp;<a href="https://www.techtarget.com/searchunifiedcommunications/definition/Erlang-C">https://www.techtarget.com/searchunifiedcommunications/definition/Erlang-C</a>):<br>
+&nbsp;-&nbsp;The&nbsp;order&nbsp;of&nbsp;customer&nbsp;requests&nbsp;follows&nbsp;a&nbsp;Poisson&nbsp;Distribution<br>
+&nbsp;-&nbsp;Service&nbsp;times&nbsp;are&nbsp;exponentially&nbsp;distributed.<br>
+&nbsp;-&nbsp;Customers&nbsp;never&nbsp;abandon&nbsp;any&nbsp;service&nbsp;request&nbsp;while&nbsp;waiting&nbsp;for&nbsp;a&nbsp;support&nbsp;agent.<br>
+&nbsp;-&nbsp;All&nbsp;lost&nbsp;calls&nbsp;are&nbsp;not&nbsp;abandoned,&nbsp;but&nbsp;simply&nbsp;delayed.<br>
+&nbsp;-&nbsp;A&nbsp;support&nbsp;agent&nbsp;handles&nbsp;only&nbsp;one&nbsp;customer&nbsp;exclusively&nbsp;for&nbsp;the&nbsp;specified&nbsp;period.<br>
+&nbsp;-&nbsp;The&nbsp;total&nbsp;number&nbsp;of&nbsp;support&nbsp;resources&nbsp;is&nbsp;lower&nbsp;than&nbsp;the&nbsp;number&nbsp;of&nbsp;customers.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="math.html">math</a><br>
+</td><td width="25%" valign=top><a href="pandas.html">pandas</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-nurse_demand"><strong>nurse_demand</strong></a>(chats, average_handling_time: float = 20.0, target_wait_time: float = 10, agent_refresh_fraction: float = 0.1, satisfaction: float = 0.8) -&gt; int</dt><dd><tt>Calculates&nbsp;and&nbsp;returns&nbsp;the&nbsp;recommended&nbsp;number&nbsp;of&nbsp;nurses&nbsp;required&nbsp;to&nbsp;be&nbsp;present&nbsp;for&nbsp;serving&nbsp;give&nbsp;number&nbsp;of&nbsp;chats&nbsp;(single&nbsp;entry)<br>
+&nbsp;<br>
+:param&nbsp;chats:&nbsp;number&nbsp;of&nbsp;chats&nbsp;requiring&nbsp;service<br>
+:param&nbsp;average_handling_time:&nbsp;average&nbsp;time&nbsp;spent&nbsp;with&nbsp;a&nbsp;customer&nbsp;from&nbsp;when&nbsp;they&nbsp;are&nbsp;connected&nbsp;to&nbsp;a&nbsp;nurse<br>
+:param&nbsp;target_wait_time:&nbsp;targeted&nbsp;wait&nbsp;time;&nbsp;increasing&nbsp;this&nbsp;number&nbsp;reduces&nbsp;operation&nbsp;costs&nbsp;of&nbsp;the&nbsp;company&nbsp;through&nbsp;recommending&nbsp;less&nbsp;number&nbsp;of&nbsp;nurses&nbsp;but&nbsp;a&nbsp;long&nbsp;time&nbsp;makes&nbsp;patients&nbsp;impatient!<br>
+:param&nbsp;agent_refresh_fraction:&nbsp;fraction&nbsp;of&nbsp;time&nbsp;each&nbsp;nurse&nbsp;is&nbsp;expected&nbsp;to&nbsp;spend&nbsp;on&nbsp;refreshment.<br>
+:param&nbsp;satisfaction:&nbsp;level&nbsp;of&nbsp;satisfaction&nbsp;of&nbsp;given&nbsp;criteria&nbsp;(0.&nbsp;to&nbsp;1.)<br>
+:return:&nbsp;None</tt></dd></dl>
+ <dl><dt><a name="-nurse_demand_batch"><strong>nurse_demand_batch</strong></a>(chats_series: Type[pandas.core.series.Series], average_handling_time: float = 20.0, target_wait_time: float = 10, agent_refresh_fraction: float = 0.1, satisfaction: float = 0.8, verbosity: int = 0) -&gt; List[int]</dt><dd><tt>Calculates&nbsp;and&nbsp;returns&nbsp;the&nbsp;recommended&nbsp;number&nbsp;of&nbsp;nurses&nbsp;required&nbsp;to&nbsp;be&nbsp;present&nbsp;for&nbsp;serving&nbsp;give&nbsp;a&nbsp;series&nbsp;of&nbsp;number&nbsp;of&nbsp;chats&nbsp;(batch&nbsp;entry)<br>
+&nbsp;<br>
+:param&nbsp;chats_series:&nbsp;pandas.Series&nbsp;containing&nbsp;number&nbsp;of&nbsp;chats&nbsp;indexed&nbsp;by&nbsp;dates.<br>
+:param&nbsp;average_handling_time:&nbsp;average&nbsp;time&nbsp;spent&nbsp;with&nbsp;a&nbsp;customer&nbsp;from&nbsp;when&nbsp;they&nbsp;are&nbsp;connected&nbsp;to&nbsp;a&nbsp;nurse<br>
+:param&nbsp;target_wait_time:&nbsp;targeted&nbsp;wait&nbsp;time;&nbsp;increasing&nbsp;this&nbsp;number&nbsp;reduces&nbsp;operation&nbsp;costs&nbsp;of&nbsp;the&nbsp;company&nbsp;through&nbsp;recommending&nbsp;less&nbsp;number&nbsp;of&nbsp;nurses&nbsp;but&nbsp;a&nbsp;long&nbsp;time&nbsp;makes&nbsp;patients&nbsp;impatient!<br>
+:param&nbsp;agent_refresh_fraction:&nbsp;fraction&nbsp;of&nbsp;time&nbsp;each&nbsp;nurse&nbsp;is&nbsp;expected&nbsp;to&nbsp;spend&nbsp;on&nbsp;refreshment.<br>
+:param&nbsp;satisfaction:&nbsp;level&nbsp;of&nbsp;satisfaction&nbsp;of&nbsp;given&nbsp;criteria&nbsp;(0.&nbsp;to&nbsp;1.)<br>
+:return:&nbsp;None</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>List</strong> = typing.List<br>
+<strong>Type</strong> = typing.Type</td></tr></table>
+</body></html>
