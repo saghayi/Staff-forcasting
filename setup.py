@@ -9,7 +9,7 @@ setup(
     description='MaCorp Forecast toolkit.',
     version=version,
     author='Marzie Saghayi',
-    author_email='marzie.saghsyi@gmail.com',
+    author_email='',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     classifiers=[
